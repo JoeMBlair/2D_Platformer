@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://TileMaps/Objects.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TileMaps/Enemies.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TileMaps/Blocks.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TileMaps/Items.tscn" type="PackedScene" id=4]
+[ext_resource path="res://TileMaps/BackgroundTiles.tscn" type="PackedScene" id=5]
+
+[node name="Level_Test" type="Node2D"]
+
+[node name="BackgroundTiles" parent="." instance=ExtResource( 5 )]
+
+[node name="Blocks" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 393218, 8, 0, 393220, 8, 0, 393224, 8, 0, 458755, 7, 0, 458756, 7, 0, 458757, 14, 0, 458758, 7, 0, 458759, 7, 0, 589832, 11, 0, 655360, 8, 0, 655361, 8, 0, 655362, 8, 0, 655363, 8, 0, 655364, 8, 0, 655365, 8, 0, 655366, 8, 0, 655367, 8, 0, 655368, 8, 0, 655369, 8, 0, 655370, 8, 0 )
+
+[node name="Objects" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4, 4 )
+tile_data = PoolIntArray( 524288, 1, 0 )
+
+[node name="Enemies" parent="." instance=ExtResource( 2 )]
+
+[node name="Items" parent="." instance=ExtResource( 4 )]
+tile_data = PoolIntArray( 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0 )

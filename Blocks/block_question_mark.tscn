@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Blocks/block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://block_question_mark_new.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Blocks/block_question_mark.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.5
+
+[node name="BlockQuestionMark" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 4, 4 )
+frames = ExtResource( 2 )
+frame = 3
+playing = true
+
+[node name="block" parent="." instance=ExtResource( 1 )]
+sprite = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hit = SubResource( 1 )
+[connection signal="block_hit_response" from="block" to="." method="_on_block_hit_response"]

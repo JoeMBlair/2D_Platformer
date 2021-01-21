@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TileMaps/Objects.gd" type="Script" id=1]
+[ext_resource path="res://TileMaps/new_tileset.tres" type="TileSet" id=2]
+
+[node name="Objects" type="TileMap"]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -262135, 1, 0 )
+script = ExtResource( 1 )
+tile_amount = 3
