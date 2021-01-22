@@ -1,9 +1,11 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Enemies/goomba/goomba.gd" type="Script" id=1]
+[ext_resource path="res://enemies/goomba/goomba.gd" type="Script" id=1]
 [ext_resource path="res://Art/Enemies/goomba_walk_1.png" type="Texture" id=2]
 [ext_resource path="res://Art/Enemies/goomba_walk_2.png" type="Texture" id=3]
 [ext_resource path="res://Art/Enemies/goomba_die.png" type="Texture" id=4]
+
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -29,6 +31,7 @@ radius = 31.0
 
 [node name="Goomba" type="KinematicBody2D" groups=[
 "Enemy",
+"Object",
 "Tile",
 ]]
 collision_layer = 2147483652
@@ -40,7 +43,6 @@ direction = "left"
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

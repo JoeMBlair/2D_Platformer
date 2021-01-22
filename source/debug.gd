@@ -7,13 +7,12 @@ func _ready():
 	pass
 	label.text = "boop2"
 
-
 func display_info(scene, debug_dict):
 	label.text = "aclled"
 	# Add debug dict to 
 	if debug_info.has(scene):
-		for i in debug_dict:			
-				debug_info[scene][i] = debug_dict[i]
+		for varible in debug_dict:			
+				debug_info[scene][varible] = debug_dict[varible]
 	else:
 		debug_info[scene] = debug_dict
 		
@@ -24,7 +23,7 @@ func display_info(scene, debug_dict):
 			for i_name in debug_info[i_key]:
 					label.text += str(i_name) + ": " + str(debug_info[i_key][i_name]) + "\n"
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 

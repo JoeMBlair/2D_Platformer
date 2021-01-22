@@ -5,7 +5,7 @@ var object_name = "block_brick_top"
 func _ready():
 	pass
 	
-func _process(delta):
+func _process(_delta):
 	if $block.health == 0:
 		queue_free()
 	pass

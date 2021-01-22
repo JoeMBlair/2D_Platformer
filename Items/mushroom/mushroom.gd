@@ -5,7 +5,7 @@ var item_name = "mushroom"
 var velocity : Vector2
 export var speed : int = 50
 var direction : String = "right"
-var gravity = Global.gravity
+var gravity = world_properties.gravity
 export var state : String = "spawning"
 
 func _ready():
@@ -36,7 +36,7 @@ func _process(delta):
 				
 		
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Gravity
 	
 		

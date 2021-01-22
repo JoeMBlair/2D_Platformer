@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite_block_question_mark.png-356b38855c32712d2e4b634dab8e28be.stex"
+path="res://.import/sprite_block_question_mark.png-3bdeb57c73870e4e120b41bf7c4cb08e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Blocks/block_question_mark/sprite_block_question_mark.png"
-dest_files=[ "res://.import/sprite_block_question_mark.png-356b38855c32712d2e4b634dab8e28be.stex" ]
+source_file="res://blocks/block_question_mark/sprite_block_question_mark.png"
+dest_files=[ "res://.import/sprite_block_question_mark.png-3bdeb57c73870e4e120b41bf7c4cb08e.stex" ]
 
 [params]
 

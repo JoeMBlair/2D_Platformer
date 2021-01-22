@@ -1,13 +1,14 @@
 extends KinematicBody2D
 
 export var object_name = "player"
-var score : int = Global.score
+#var score : int = Global.score
+var score : int = 0
 
 # Physics
 export var speed : int = 400
 export var jump_force : int = 1400
 export var enemy_bounce : int = 600
-export var gravity : int = Global.gravity
+var gravity = world_properties.gravity
 export var health : int = 1
 export var state = "idle"
 export var state_powerup = "small"
@@ -34,7 +35,8 @@ func debug():
 						"Grounded": grounded, 
 						"On Floor": on_floor,
 						"Health": health,
-						"Position": position})
+						"Position": position,
+						"State": state})
 	
 	if Input.is_action_just_released("debug"):
 		$AnimationPlayer.play("die")
@@ -114,10 +116,12 @@ func _physics_process(delta):
 		$JumpTimer.start()
 
 
-func _process(delta):
+func _process(_delta):
 #	sprite.position = player.position
 	debug()
 	player_animation()
+	get_block_collisions()
+	
 	
 	if state_powerup == "mushroom" and sprite.position.y != 32:
 		sprite.animation = "mushroom"
@@ -125,27 +129,25 @@ func _process(delta):
 		player = $PlayerBig/DetectorHead
 		$PlayerBig.set_deferred("disabled", false)
 		$PlayerSmall.set_deferred("disabled", true)
-		
 	elif state_powerup == "small" and sprite.position.y != 0:
 		sprite.animation = "small"
 		sprite.position.y = 0
 		player = $PlayerSmall/DetectorHead
 		$PlayerBig.set_deferred("disabled", true)
 		$PlayerSmall.set_deferred("disabled", false)
-		
-		
-		
-	pass
 	
-	var bodies = player.get_overlapping_areas()
-	for i in bodies:
-		print(i)
-		if i.is_in_group("Block") and state == "jump":
-			i.get_parent().block_hit("small")
+	
+	
 
 
 func _on_JumpTimer_timeout():
 	grounded = false
+
+func get_block_collisions():
+	var bodies = player.get_overlapping_bodies()
+	for i in bodies:
+		if i.is_in_group("Block") and state == "jump":
+			i.block_hit("small")
 
 
 func _on_DetectorFeet_area_shape_entered(_area_id, area, _area_shape, _self_shape):
@@ -167,10 +169,11 @@ func take_damage():
 #		$DetectorHead/CollisionShape2D.set_deferred("disabled", true)
 
 
-func _on_DetectorFeet_area_entered(area):
-	if area.get_parent().state == "alive":
-		if velocity.y > 0:
-			velocity.y = 0
-			velocity.y -= enemy_bounce
-			area.get_parent().take_damage()
-	
+func _on_DetectorFeet_area_entered(_area):
+#	if area.get_parent().state == "alive":
+#		if velocity.y > 0:
+#			velocity.y = 0
+#			velocity.y -= enemy_bounce
+#			area.get_parent().take_damage()
+	pass
+#

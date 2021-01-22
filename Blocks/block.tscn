@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Blocks/block.gd" type="Script" id=1]
+[ext_resource path="res://blocks/block.gd" type="Script" id=1]
 [ext_resource path="res://Art/blocks/block_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://Art/items/coin.png" type="Texture" id=3]
 [ext_resource path="res://Art/items/mushroom.png" type="Texture" id=4]
@@ -47,14 +47,14 @@ region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 5 ) ],
-"loop": false,
-"name": "coin",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": false,
 "name": "mushroom",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": false,
+"name": "coin",
 "speed": 5.0
 }, {
 "frames": [  ],
@@ -71,13 +71,16 @@ extents = Vector2( 30, 4 )
 
 [sub_resource type="RectangleShape2D" id=9]
 
-[node name="block" type="StaticBody2D"]
+[node name="block" type="StaticBody2D" groups=[
+"Block",
+]]
 collision_layer = 2
 script = ExtResource( 1 )
 sprite = SubResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 1, 1, 0.384314 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." groups=[
+"Block",
+]]
 scale = Vector2( 4, 4 )
 frames = SubResource( 3 )
 

@@ -12,8 +12,8 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# ntCalled every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass
 
 func spawn_item():
@@ -30,4 +30,4 @@ func _on_Coin_body_entered(body):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "spawn":
 		self.queue_free()
-		Global.score += 100
+		world_properties.score += 100

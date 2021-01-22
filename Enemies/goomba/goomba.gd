@@ -1,14 +1,14 @@
 extends KinematicBody2D
 
 var object_name = "goomba"
-var score : int = 0
 export var direction = "right"
 var state = "alive"
 
 # Physics
 export var speed : int = 50
 export var jumpForce : int = 600
-export var gravity : int = Global.gravity
+#var gravity : int = Global.gravity
+var gravity : int = world_properties.gravity
 
 var velocity : Vector2 = Vector2()
 var grounded : bool = false
@@ -44,13 +44,13 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
-func _on_DetectorLeft_body_entered(body):
+func _on_DetectorLeft_body_entered(_body):
 	direction = "right"
 	$DetectorLeft/CollisionShape2D.set_deferred("disabled", true)
 	$DetectorRight/CollisionShape2D.set_deferred("disabled", false)
 
 
-func _on_DetectorRight_body_entered(body):
+func _on_DetectorRight_body_entered(_body):
 	direction = "left"
 	$DetectorLeft/CollisionShape2D.set_deferred("disabled", false)
 	$DetectorRight/CollisionShape2D.set_deferred("disabled", true)
@@ -76,7 +76,6 @@ func _on_HitBox_body_entered(body):
 
 
 func _on_DetectorHead_body_entered(body):
-	print(body)
 	if body.is_in_group('Player'):
 		take_damage()
 	

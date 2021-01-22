@@ -16,13 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="2d Platformer"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://scene/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Debug="*res://Debug.tscn"
-Global="*res://Global.tscn"
+Debug="*res://source/scenes/debug.tscn"
+world_properties="*res://source/scenes/global.tscn"
+get_objects="*res://source/scenes/get_object_paths.tscn"
 
 [display]
 

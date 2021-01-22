@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite_bullet_bill.png-56b3dfcda68a22af546af16c6dd72b0b.stex"
+path="res://.import/sprite_bullet_bill.png-2a77f23a6cdc5d26326e0478501232fd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemies/bullet_bill/sprite_bullet_bill.png"
-dest_files=[ "res://.import/sprite_bullet_bill.png-56b3dfcda68a22af546af16c6dd72b0b.stex" ]
+source_file="res://enemies/bullet_bill/sprite_bullet_bill.png"
+dest_files=[ "res://.import/sprite_bullet_bill.png-2a77f23a6cdc5d26326e0478501232fd.stex" ]
 
 [params]
 

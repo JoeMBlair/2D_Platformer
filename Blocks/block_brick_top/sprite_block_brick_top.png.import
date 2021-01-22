@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite_block_brick_top.png-1e265916fe5fa8942288936f19acd0bb.stex"
+path="res://.import/sprite_block_brick_top.png-775b8d1778b80f14452ac45fc9e0ac8c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Blocks/block_brick_top/sprite_block_brick_top.png"
-dest_files=[ "res://.import/sprite_block_brick_top.png-1e265916fe5fa8942288936f19acd0bb.stex" ]
+source_file="res://blocks/block_brick_top/sprite_block_brick_top.png"
+dest_files=[ "res://.import/sprite_block_brick_top.png-775b8d1778b80f14452ac45fc9e0ac8c.stex" ]
 
 [params]
 

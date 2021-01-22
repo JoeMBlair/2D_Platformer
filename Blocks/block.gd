@@ -14,7 +14,7 @@ func _ready():
 		$AnimatedSprite.set_sprite_frames(sprite)
 
 
-func _process(delta):
+func _process(_delta):
 	if Engine.editor_hint:
 		editor_logic()
 	else:
@@ -41,20 +41,21 @@ func block_hit(powerup):
 		emit_signal("block_hit_response", powerup)
 		$AnimationPlayer.play("hit")
 		if held_item != "none":
-			var spawn_item = held_item
-			held_item = "none"
-			
-			var filename = "res://Items/" + str(spawn_item) + ".tscn"
+#			var spawn_item = held_item
+			var filename = get_objects.object_paths[held_item]
 			var item_instance = load(filename).instance()
 			add_child(item_instance)
 			var position = Vector2(0, 0)
 			item_instance.spawn_item()
 			item_instance.position = position
+			held_item = "none"
+			
 
 
 func _on_DetectorItem_area_entered(area):
-	if area.is_in_group("Item"):
-		held_item = area.get_parent().item_name
+#	print(area.get_owner().name)
+	if area.is_in_group("LoadItem"):
+		held_item = area.get_owner().item_name
 		$DetectorItem/CollisionShape2D.set_deferred("disabled", true)
 		area.get_owner().queue_free()
 
