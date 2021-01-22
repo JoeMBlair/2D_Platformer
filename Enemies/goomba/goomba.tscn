@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://enemies/goomba/goomba.gd" type="Script" id=1]
 [ext_resource path="res://Art/Enemies/goomba_walk_1.png" type="Texture" id=2]
 [ext_resource path="res://Art/Enemies/goomba_walk_2.png" type="Texture" id=3]
 [ext_resource path="res://Art/Enemies/goomba_die.png" type="Texture" id=4]
-
-
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,13 +19,16 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1, 6 )
+extents = Vector2( 28, 30 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 1, 6 )
-
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 31.0
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 1, 6 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 1, 6 )
 
 [node name="Goomba" type="KinematicBody2D" groups=[
 "Enemy",
@@ -43,50 +44,51 @@ direction = "left"
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
 animation = "walk"
+frame = 1
 playing = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
-scale = Vector2( 4, 4 )
-polygon = PoolVector2Array( -8, -1, -8, 2, -7, 3, -7, 8, 7, 8, 7, 8, 7, 3, 8, 2, 8, -1, 7, -3, 1.99513, -7.78846, -1.98475, -7.78846, -7, -3 )
 
-[node name="DetectorLeft" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
+
+[node name="Detector" type="Node2D" parent="."]
+
+[node name="Head" type="Area2D" parent="Detector"]
+modulate = Color( 0, 1, 0, 1 )
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector/Head"]
+shape = SubResource( 3 )
+
+[node name="Body" type="Area2D" parent="Detector"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Detector/Body"]
+scale = Vector2( 4, 4 )
+polygon = PoolVector2Array( -8, 0, 8, 0, 7, 8, -7, 8 )
+
+[node name="Left" type="Area2D" parent="Detector"]
 modulate = Color( 0, 1, 0, 1 )
 collision_layer = 4
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorLeft"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector/Left"]
 position = Vector2( -36, 0 )
 scale = Vector2( 4, 4 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
-[node name="DetectorRight" type="Area2D" parent="."]
+[node name="Right" type="Area2D" parent="Detector"]
 modulate = Color( 0, 1, 0.0392157, 1 )
 collision_layer = 4
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorRight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector/Right"]
 position = Vector2( 36, 0 )
 scale = Vector2( 4, 4 )
-shape = SubResource( 3 )
-
-[node name="DetectorHead" type="Area2D" parent="."]
-modulate = Color( 0, 1, 0, 1 )
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorHead"]
-shape = SubResource( 4 )
-
-[node name="HitBox" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
-scale = Vector2( 4, 4 )
-polygon = PoolVector2Array( -8, 0, 8, 0, 7, 8, -7, 8 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
+shape = SubResource( 5 )
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
-[connection signal="body_entered" from="DetectorLeft" to="." method="_on_DetectorLeft_body_entered"]
-[connection signal="body_entered" from="DetectorRight" to="." method="_on_DetectorRight_body_entered"]
-[connection signal="body_entered" from="DetectorHead" to="." method="_on_DetectorHead_body_entered"]
-[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
+[connection signal="body_entered" from="Detector/Body" to="." method="_on_HitBox_body_entered"]
+[connection signal="body_entered" from="Detector/Left" to="." method="_on_DetectorLeft_body_entered"]
+[connection signal="body_entered" from="Detector/Right" to="." method="_on_DetectorRight_body_entered"]

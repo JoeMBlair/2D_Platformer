@@ -49,6 +49,9 @@ func block_hit(powerup):
 			item_instance.spawn_item()
 			item_instance.position = position
 			held_item = "none"
+		else:
+			if powerup != "small":
+				get_owner().queue_free()
 			
 
 

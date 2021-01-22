@@ -30,8 +30,6 @@ func add_objects(tilemap : TileMap):
 	for tile_id in tile_id_array.size():
 		var tile_id_vector = tilemap.get_cellv(tile_id_array[tile_id])
 		var tile_name = tilemap.tile_set.tile_get_name(tile_id_vector)
-		var object = get_objects.object_paths
-#		print(tilemap_tile_name)
 		
 		if objects.has(tile_name):
 			var filename = objects[tile_name]
@@ -49,7 +47,7 @@ func add_objects(tilemap : TileMap):
 func load_level():
 #	var filename = "res://Levels/" + level_name + ".tscn"
 	var filename
-	filename = "res://Levels/world_1/level_test/Level_Test.tscn"
+	filename = "res://Levels/world_1/level_1_1/Level_1.tscn"
 	level_instance = load(filename).instance()
 	add_child(level_instance)
 	level_instance.position = Vector2(0, 0)

@@ -7,12 +7,12 @@ var score : int = 0
 # Physics
 export var speed : int = 400
 export var jump_force : int = 1400
-export var enemy_bounce : int = 600
+export var enemy_bounce_force : int = 600
 var gravity = world_properties.gravity
 export var health : int = 1
 export var state = "idle"
 export var state_powerup = "small"
-onready var player = get_node("PlayerSmall/DetectorHead")
+#onready var player = get_node("PlayerSmall/DetectorHead")
 
 var velocity : Vector2 = Vector2()
 var grounded : bool = true
@@ -22,10 +22,16 @@ var on_floor
 
 # Components
 export onready var sprite = $AnimatedSprite
+onready var player_body = get_node("PlayerSmall")
+onready var player_head = get_node("PlayerSmall/DetectorHead")
+onready var player_feet = get_node("PlayerSmall/DetectorFeet")
 signal current_state(state)
 
 
 func _ready():
+	set_state_powerup(state_powerup)
+	get_node("PlayerSmall/DetectorBody").connect("body_entered", self, "on_body_touch")
+	get_node("PlayerSmall/DetectorFeet").connect("area_entered", self, "on_feet_touch")	
 	pass
 
 
@@ -36,7 +42,9 @@ func debug():
 						"On Floor": on_floor,
 						"Health": health,
 						"Position": position,
-						"State": state})
+						"State": state,
+						"power up state": state_powerup,
+						"Velocity": velocity})
 	
 	if Input.is_action_just_released("debug"):
 		$AnimationPlayer.play("die")
@@ -62,32 +70,39 @@ func get_input():
 		grounded = false
 		set_state("jump")
 
+func flip_direction():
+	sprite.flip_h = not sprite.flip_h
+	
+
 
 func player_animation():
 #	Debug.display_info("Player", {"Anim": $AnimationPlayer.current_animation,
 #									"State": state})
-					
-	if state != "jump":
-		if velocity.x == 0:
-			set_state("idle")
-		else:
-			set_state("walk")
+	if state != "die":
+		if state != "jump":
+			if velocity.x == 0:
+				set_state("idle")
+			else:
+				set_state("walk")
+		
+			if direction == "left":
+				pass
+				sprite.flip_h = true
+			else:
+				pass
+				sprite.flip_h = false
 	
-		if direction == "left":
-			pass
-			sprite.flip_h = true
-		else:
-			pass
-			sprite.flip_h = false
-	
-	if $AnimationPlayer.current_animation != "state":
-		$AnimationPlayer.play(state)
 
 
 func set_state(state_name):
-	if state != state_name:
-		state = state_name
-		emit_signal("current_state", state)
+	if state != "die":
+		if state != state_name:
+			state = state_name
+			$AnimationPlayer.play(state)
+			
+#			if $AnimationPlayer.current_animation != "state":
+			
+			emit_signal("current_state", state)
 
 
 func _physics_process(delta):
@@ -95,10 +110,8 @@ func _physics_process(delta):
 	velocity.x = 0
 	if health > 0:
 		get_input()
-	
-	
-	# Gravity
-	velocity.y += gravity * delta
+		# Gravity
+		velocity.y += gravity * delta
 
 	# Direction
 	
@@ -116,38 +129,52 @@ func _physics_process(delta):
 		$JumpTimer.start()
 
 
+func set_state_powerup(powerup):
+	if state_powerup != powerup:
+		player_feet.disconnect("area_entered", self, "on_feet_touch")
+		player_body.disconnect("body_entered", self, "on_body_touch")
+		player_body.set_deferred("disabled", true)
+		print(player_body.filename)
+		print(player_feet.filename)
+		
+		state_powerup = powerup
+		
+		if state_powerup == "mushroom":
+			player_body = $PlayerBig
+			sprite.animation = "mushroom"
+			
+		elif state_powerup == "small":
+			player_body = $PlayerSmall
+			sprite.animation = "small"
+		player_feet = player_body.get_node("DetectorFeet")
+		player_head = player_body.get_node("DetectorHead")
+		print(player_body.filename)
+		print(player_feet.filename)
+		player_body.set_deferred("disabled", false)
+		player_feet.connect("area_entered", self, "on_feet_touch")
+		
+		player_body.connect("body_entered", self, "on_body_touch")
+		print(player_body)
+		
+
+
 func _process(_delta):
-#	sprite.position = player.position
 	debug()
 	player_animation()
 	get_block_collisions()
-	
-	
-	if state_powerup == "mushroom" and sprite.position.y != 32:
-		sprite.animation = "mushroom"
-		sprite.position.y = -32
-		player = $PlayerBig/DetectorHead
-		$PlayerBig.set_deferred("disabled", false)
-		$PlayerSmall.set_deferred("disabled", true)
-	elif state_powerup == "small" and sprite.position.y != 0:
-		sprite.animation = "small"
-		sprite.position.y = 0
-		player = $PlayerSmall/DetectorHead
-		$PlayerBig.set_deferred("disabled", true)
-		$PlayerSmall.set_deferred("disabled", false)
-	
-	
-	
 
 
 func _on_JumpTimer_timeout():
 	grounded = false
 
+
 func get_block_collisions():
-	var bodies = player.get_overlapping_bodies()
-	for i in bodies:
-		if i.is_in_group("Block") and state == "jump":
-			i.block_hit("small")
+#	var player_head = player_body.get_node("DetectorHead")
+	var bodies = player_head.get_overlapping_bodies()
+	for body in bodies:
+		print(bodies)		
+		if body.is_in_group("Block") and state == "jump":
+			body.block_hit(state_powerup)
 
 
 func _on_DetectorFeet_area_shape_entered(_area_id, area, _area_shape, _self_shape):
@@ -156,24 +183,40 @@ func _on_DetectorFeet_area_shape_entered(_area_id, area, _area_shape, _self_shap
 		if area.get_parent().state == "alive":
 			if velocity.y > 0:
 				velocity.y = 0
-				velocity.y -= enemy_bounce
+				velocity.y -= enemy_bounce_force
 				area.get_parent().take_damage()
 
 
 func take_damage():
 	health -= 1
 	if health == 0:
+		velocity = Vector2(0, 0)
 		set_state("die")
-#		$CollisionShape2D.set_deferred("disabled", true)
-#		$DetectorFeet/CollisionShape2D.set_deferred("disabled", true)
-#		$DetectorHead/CollisionShape2D.set_deferred("disabled", true)
+		player_body.set_deferred("disabled", true)
 
 
-func _on_DetectorFeet_area_entered(_area):
-#	if area.get_parent().state == "alive":
-#		if velocity.y > 0:
-#			velocity.y = 0
-#			velocity.y -= enemy_bounce
-#			area.get_parent().take_damage()
-	pass
-#
+func enemy_bounce(area):
+	if velocity.y > 0:
+		velocity.y = 0
+		velocity.y -= enemy_bounce_force
+		area.get_owner().take_damage()
+
+
+func _on_DetectorFeet_body_entered(area):
+	if area.get_owner().is_in_group("Enemy"):
+		enemy_bounce(area)
+
+
+func _on_DetectorBody_body_entered(body):
+	if body.is_in_group("Item"):
+		set_state_powerup(body.item_name)
+		body.queue_free()
+		
+func on_feet_touch(area):
+	if area.get_owner().is_in_group("Enemy"):
+		enemy_bounce(area)
+
+func on_body_touch(body):
+	if body.is_in_group("Item"):
+		set_state_powerup(body.item_name)
+		body.queue_free()

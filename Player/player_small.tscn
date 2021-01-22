@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://player/PlayerSmall.gd" type="Script" id=2]
-
-
+[ext_resource path="res://Player/player_small.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 30 )
@@ -13,13 +11,14 @@ extents = Vector2( 1, 4 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 24, 4 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 30 )
+
 [node name="PlayerSmall" type="CollisionShape2D"]
 shape = SubResource( 1 )
 script = ExtResource( 2 )
 
-[node name="DetectorHead" type="Area2D" parent="." groups=[
-"Player",
-]]
+[node name="DetectorHead" type="Area2D" parent="."]
 position = Vector2( 0, -2 )
 collision_layer = 0
 collision_mask = 2
@@ -39,4 +38,9 @@ collision_mask = 8
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, 28 )
 shape = SubResource( 3 )
-[connection signal="area_entered" from="DetectorHead" to="." method="_on_DetectorHead_area_entered"]
+
+[node name="DetectorBody" type="Area2D" parent="."]
+collision_mask = 2147483668
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorBody"]
+shape = SubResource( 4 )

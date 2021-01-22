@@ -15,6 +15,8 @@ var grounded : bool = false
 
 # Components
 onready var sprite = $Sprite
+onready var detector_left = $Detector/Left/CollisionShape2D
+onready var detector_right = $Detector/Right/CollisionShape2D
 
 func debug():
 	var debug_array = {"Direction": direction, "Velocity": velocity, "bit": $DetectorHead.get_collision_layer_bit(3)}
@@ -46,14 +48,14 @@ func _physics_process(delta):
 
 func _on_DetectorLeft_body_entered(_body):
 	direction = "right"
-	$DetectorLeft/CollisionShape2D.set_deferred("disabled", true)
-	$DetectorRight/CollisionShape2D.set_deferred("disabled", false)
+	detector_left.set_deferred("disabled", true)
+	detector_right.set_deferred("disabled", false)
 
 
 func _on_DetectorRight_body_entered(_body):
 	direction = "left"
-	$DetectorLeft/CollisionShape2D.set_deferred("disabled", false)
-	$DetectorRight/CollisionShape2D.set_deferred("disabled", true)
+	detector_left.set_deferred("disabled", false)
+	detector_right.set_deferred("disabled", true)
 
 
 func _on_Sprite_animation_finished():
@@ -66,16 +68,12 @@ func take_damage():
 	velocity.x = 0
 	velocity.y = 0
 	$Sprite.animation = "die"
-	$DetectorHead.set_collision_layer_bit(3, false)
-	$CollisionPolygon2D.set_deferred("disabled", true)
+	$Detector.queue_free()
 
 
 func _on_HitBox_body_entered(body):
-	if body.is_in_group("Player") and state == "alive":
-		body.take_damage()
-
-
-func _on_DetectorHead_body_entered(body):
-	if body.is_in_group('Player'):
-		take_damage()
-	
+	if body.is_in_group("Player"):
+		print(body.name)
+		if body.velocity.y < 0.1 and state == "alive":
+			print(body.is_in_group("Player"))
+			body.take_damage()
