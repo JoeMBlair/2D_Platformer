@@ -5,4 +5,3 @@
 [node name="Main" type="Node2D"]
 z_index = 1
 script = ExtResource( 6 )
-level_name = "Level_Test"

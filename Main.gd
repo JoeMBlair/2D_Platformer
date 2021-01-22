@@ -1,7 +1,10 @@
 extends Node2D
 
-export var level_name = "Level_1"
+export(NodePath) var level_name = "world_1/level_test/level_test"
+export(NodePath) var node_path
+onready var node_ref = get_node(node_path)
 var fps
+var level_instance
 signal level_xy
 var tiles = {"Enemies": ["goomba", "bullet_bill"],
 			"Items": ["mushroom", "coin"],
@@ -32,9 +35,14 @@ func add_objects(tilemap : TileMap):
 		for tile_id in tile_id_array.size():
 			var tile_id_vector = tilemap.get_cellv(tile_id_array[tile_id])
 			var tile_name = tilemap.tile_set.tile_get_name(tile_id_vector)
-	#		
-			if tiles[tilemap.name].has(tile_name):
-				var filename = "res://" + tilemap.name + "/" + tile_name + ".tscn"
+			var tilemap_tile_name = tilemap.get_node("GetTilePaths").tile_paths
+			
+			print(tilemap_tile_name.keys())
+			print(tile_name)
+			if tilemap_tile_name.has(tile_name):
+				print("test")
+				var filename = tilemap_tile_name[tile_name]
+				print(filename)
 				var object_instance = load(filename).instance()
 				add_child(object_instance)
 				var position = tilemap.map_to_world(tile_id_array[tile_id] * 4)
@@ -47,11 +55,12 @@ func add_objects(tilemap : TileMap):
 
 
 func load_level():
-	var filename = "res://Levels/" + level_name + ".tscn"
-	var level_instance = load(filename).instance()
+#	var filename = "res://Levels/" + level_name + ".tscn"
+	var filename
+	filename = "res://Levels/world_1/level_test/Level_Test.tscn"
+	level_instance = load(filename).instance()
 	add_child(level_instance)
 	level_instance.position = Vector2(0, 0)
-#	level_instance.set_name("Level_layout")
 	
 	add_objects(level_instance.get_node("Enemies"))
 	add_objects(level_instance.get_node("Blocks"))

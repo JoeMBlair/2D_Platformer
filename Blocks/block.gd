@@ -16,12 +16,8 @@ func _ready():
 
 func _process(delta):
 	if Engine.editor_hint:
-		pass
 		editor_logic()
-		
 	else:
-		pass
-		
 		# Sets HeldItem sprite to currently held_item varible with live update in editor
 		var bodies = $DetectorItem.get_overlapping_bodies()
 		if bodies.size() != 0:
@@ -29,14 +25,17 @@ func _process(delta):
 				if "item_name" in i:
 					held_item = i.item_name
 					i.queue_free()
+					
 	if $HeldItem.animation != self.get("held_item"):
 			$HeldItem.animation = held_item
+
 
 func editor_logic():
 	# Loads SpritesFrame resource from file picker in editor
 		if $AnimatedSprite.frames != self.get("sprite"):
 			$AnimatedSprite.set_sprite_frames(sprite)
-# 
+
+
 func block_hit(powerup):
 	if health > 0:
 		emit_signal("block_hit_response", powerup)
@@ -57,4 +56,5 @@ func _on_DetectorItem_area_entered(area):
 	if area.is_in_group("Item"):
 		held_item = area.get_parent().item_name
 		$DetectorItem/CollisionShape2D.set_deferred("disabled", true)
-		area.get_parent().queue_free()
+		area.get_owner().queue_free()
+
