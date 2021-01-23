@@ -66,7 +66,6 @@ func get_input():
 	if jump and grounded:
 		velocity.y = 0
 		velocity.y -= jump_force
-		jumping = true
 		grounded = false
 		set_state("jump")
 
@@ -98,11 +97,14 @@ func set_state(state_name):
 	if state != "die":
 		if state != state_name:
 			state = state_name
-			$AnimationPlayer.play(state)
+			if state != "fall":
+				$AnimationPlayer.play(state)
 			
 #			if $AnimationPlayer.current_animation != "state":
 			
 			emit_signal("current_state", state)
+		
+			
 
 
 func _physics_process(delta):
@@ -110,8 +112,9 @@ func _physics_process(delta):
 	velocity.x = 0
 	if health > 0:
 		get_input()
-		# Gravity
-		velocity.y += gravity * delta
+		
+	# Gravity
+	velocity.y += gravity * delta
 
 	# Direction
 	
@@ -122,10 +125,12 @@ func _physics_process(delta):
 	if !grounded and is_on_floor():
 		grounded = true
 		set_state("idle")
-	if jumping and grounded:
-		jumping = false
+	if state == "jump" and grounded:
+		pass
+	if velocity.y > 0:
+		set_state("fall")
 		
-	if !is_on_floor() and $JumpTimer.is_stopped() and !jumping:
+	if !is_on_floor() and $JumpTimer.is_stopped() and state != "jump":
 		$JumpTimer.start()
 
 
@@ -170,11 +175,11 @@ func _on_JumpTimer_timeout():
 
 func get_block_collisions():
 #	var player_head = player_body.get_node("DetectorHead")
-	var bodies = player_head.get_overlapping_bodies()
-	for body in bodies:
-		print(bodies)		
-		if body.is_in_group("Block") and state == "jump":
-			body.block_hit(state_powerup)
+	var areas = player_head.get_overlapping_areas()
+	for area in areas:
+		print(velocity)		
+		if area.is_in_group("BlockHit") and velocity.y < 60:
+			area.get_owner().block_hit(state_powerup)
 
 
 func _on_DetectorFeet_area_shape_entered(_area_id, area, _area_shape, _self_shape):
@@ -189,10 +194,15 @@ func _on_DetectorFeet_area_shape_entered(_area_id, area, _area_shape, _self_shap
 
 func take_damage():
 	health -= 1
+	check_health()
+	
+
+func check_health():
 	if health == 0:
 		velocity = Vector2(0, 0)
 		set_state("die")
-		player_body.set_deferred("disabled", true)
+		
+		print(get_tree().get_root())
 
 
 func enemy_bounce(area):
@@ -220,3 +230,10 @@ func on_body_touch(body):
 	if body.is_in_group("Item"):
 		set_state_powerup(body.item_name)
 		body.queue_free()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "die":
+		player_body.set_deferred("disabled", true)
+		$Camera2D
+		

@@ -56,7 +56,7 @@ func block_hit(powerup):
 
 
 func _on_DetectorItem_area_entered(area):
-#	print(area.get_owner().name)
+#	print(area.get_;owner().name)
 	if area.is_in_group("LoadItem"):
 		held_item = area.get_owner().item_name
 		$DetectorItem/CollisionShape2D.set_deferred("disabled", true)

@@ -97,7 +97,9 @@ animation = "none"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 7 )
 
-[node name="DetectorBreak" type="Area2D" parent="."]
+[node name="DetectorBreak" type="Area2D" parent="." groups=[
+"BlockHit",
+]]
 modulate = Color( 0, 1, 0, 1 )
 collision_layer = 2
 

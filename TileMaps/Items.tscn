@@ -33,7 +33,9 @@
 1/shapes = [  ]
 1/z_index = 0
 
-[node name="Items" type="TileMap"]
+[node name="Items" type="TileMap" groups=[
+"GameTiles",
+]]
 modulate = Color( 1, 1, 1, 0.513726 )
 scale = Vector2( 4, 4 )
 tile_set = SubResource( 1 )

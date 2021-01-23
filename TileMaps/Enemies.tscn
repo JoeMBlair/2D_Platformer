@@ -33,7 +33,9 @@
 1/shapes = [  ]
 1/z_index = 0
 
-[node name="Enemies" type="TileMap"]
+[node name="Enemies" type="TileMap" groups=[
+"GameTiles",
+]]
 position = Vector2( 4, 4 )
 scale = Vector2( 4, 4 )
 tile_set = SubResource( 1 )
