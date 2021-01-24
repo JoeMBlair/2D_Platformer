@@ -4,7 +4,7 @@
 [ext_resource path="res://Player/player_big.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 62 )
+extents = Vector2( 28, 60 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -71,7 +71,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 2, 6 )
+extents = Vector2( 12, 6 )
 
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 32, 8 )
@@ -80,25 +80,25 @@ extents = Vector2( 32, 8 )
 extents = Vector2( 32, 62 )
 
 [node name="PlayerBig" type="CollisionShape2D"]
-self_modulate = Color( 0.0431373, 0.192157, 0.0470588, 0.733333 )
+self_modulate = Color( 0.0431373, 0.192157, 0.0470588, 0.65098 )
 shape = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 0, -2 )
+position = Vector2( 0, -4 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 16 )
-__meta__ = {
-"_edit_lock_": true
-}
+frame = 5
 
 [node name="DetectorHead" type="Area2D" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 0, -2 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorHead"]
-position = Vector2( 0, -64 )
+position = Vector2( 0, -53 )
 shape = SubResource( 17 )
 
 [node name="DetectorFeet" type="Area2D" parent="."]
@@ -113,5 +113,6 @@ shape = SubResource( 18 )
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorBody"]
+visible = false
 shape = SubResource( 19 )
 [connection signal="body_entered" from="DetectorHead" to="." method="_on_DetectorHead_body_entered"]

@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 var object_name = "coin"
 var item_name = "coin"
@@ -21,11 +21,9 @@ func spawn_item():
 	$AnimationPlayer.play("spawn")
 	pass
 
-func _on_Coin_body_entered(body):
-	if body.is_in_group("Player"):
-		self.queue_free()
-		pass
 
+func object_collision():
+	queue_free()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "spawn":

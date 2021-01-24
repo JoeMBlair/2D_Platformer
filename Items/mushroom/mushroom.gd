@@ -43,6 +43,9 @@ func _physics_process(_delta):
 	# Applying the velocity
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+func object_collision():
+	queue_free()
+	return item_name
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "spawn":

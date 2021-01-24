@@ -20,6 +20,6 @@ frames = ExtResource( 2 )
 visible = false
 scale = Vector2( 4, 4 )
 frames = ExtResource( 2 )
-[connection signal="block_hit_response" from="block" to="." method="_on_block_block_hit_response"]
+[connection signal="block_hit_response" from="block" to="." method="_on_block_hit_response"]
 
 [editable path="block"]

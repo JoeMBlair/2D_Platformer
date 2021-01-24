@@ -17,4 +17,5 @@ func _ready():
 
 
 func _on_DetectorHead_body_entered(body):
-	print("test")
+#	print("test")
+	pass

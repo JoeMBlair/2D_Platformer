@@ -12,6 +12,7 @@ var gravity = world_properties.gravity
 export var health : int = 1
 export var state = "idle"
 export var state_powerup = "small"
+var hit_block = false
 #onready var player = get_node("PlayerSmall/DetectorHead")
 
 var velocity : Vector2 = Vector2()
@@ -31,6 +32,7 @@ signal current_state(state)
 func _ready():
 	set_state_powerup(state_powerup)
 	get_node("PlayerSmall/DetectorBody").connect("body_entered", self, "on_body_touch")
+    get_node("PlayerSmall/DetectorHead").connect("area_entered", self, "on_head_touch")
 	get_node("PlayerSmall/DetectorFeet").connect("area_entered", self, "on_feet_touch")	
 	pass
 
@@ -99,9 +101,7 @@ func set_state(state_name):
 			state = state_name
 			if state != "fall":
 				$AnimationPlayer.play(state)
-			
-#			if $AnimationPlayer.current_animation != "state":
-			
+
 			emit_signal("current_state", state)
 		
 			
@@ -124,10 +124,11 @@ func _physics_process(delta):
 	#Jumping
 	if !grounded and is_on_floor():
 		grounded = true
+        hit_block = false
 		set_state("idle")
 	if state == "jump" and grounded:
 		pass
-	if velocity.y > 0:
+	if velocity.y > 400:
 		set_state("fall")
 		
 	if !is_on_floor() and $JumpTimer.is_stopped() and state != "jump":

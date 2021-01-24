@@ -4,8 +4,6 @@
 [ext_resource path="res://blocks/block_brick_top/block_brick_top.gd" type="Script" id=2]
 [ext_resource path="res://blocks/block.tscn" type="PackedScene" id=3]
 
-
-
 [node name="BlockBrickTop" type="Node2D" groups=[
 "Block",
 "Object",
@@ -23,3 +21,5 @@ sprite = ExtResource( 1 )
 visible = false
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
+[connection signal="block_hit_response" from="block" to="." method="_on_block_hit_response"]
+[connection signal="block_hit_response" from="block" to="." method="_on_block_block_hit_response"]

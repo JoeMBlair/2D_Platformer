@@ -2,7 +2,6 @@
 
 [ext_resource path="res://source/load_level.gd" type="Script" id=1]
 
-
 [node name="LoadLevel" type="Node2D"]
 script = ExtResource( 1 )
 

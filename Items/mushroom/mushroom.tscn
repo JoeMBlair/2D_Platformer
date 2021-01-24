@@ -38,6 +38,7 @@ extents = Vector2( 29, 31 )
 [node name="Mushroom" type="KinematicBody2D" groups=[
 "Item",
 "Object",
+"PowerUp",
 ]]
 position = Vector2( 0, -64 )
 z_index = -1

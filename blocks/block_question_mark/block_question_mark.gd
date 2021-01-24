@@ -8,7 +8,7 @@ func _ready():
 func _process(_delta):
 	pass
 
-func _on_block_hit_response(_powerup):
+func _on_block_hit_response(_powerup, _item):
 #	print(powerup)
 	$block/AnimatedSprite.animation = "hit"
 	$block.health = 0
