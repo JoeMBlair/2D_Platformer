@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite_coin.png-74059896593be13eb383971e455d3b27.stex"
+path="res://.import/goomba_die.png-668d1ec2a2d5e9fcbc755fa5568767ef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/coin/sprite_coin.png"
-dest_files=[ "res://.import/sprite_coin.png-74059896593be13eb383971e455d3b27.stex" ]
+source_file="res://art_old/Enemies/goomba_die.png"
+dest_files=[ "res://.import/goomba_die.png-668d1ec2a2d5e9fcbc755fa5568767ef.stex" ]
 
 [params]
 

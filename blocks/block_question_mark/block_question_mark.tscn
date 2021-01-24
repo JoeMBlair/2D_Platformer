@@ -11,13 +11,13 @@
 ]]
 script = ExtResource( 3 )
 
+[node name="block" parent="." instance=ExtResource( 2 )]
+sprite = ExtResource( 4 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
 scale = Vector2( 4, 4 )
 frames = ExtResource( 4 )
-animation = "hit"
+frame = 5
 playing = true
-
-[node name="block" parent="." instance=ExtResource( 2 )]
-sprite = ExtResource( 4 )
 [connection signal="block_hit_response" from="block" to="." method="_on_block_hit_response"]

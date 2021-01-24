@@ -1,27 +1,25 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://blocks/block.gd" type="Script" id=1]
-[ext_resource path="res://_Art/blocks/block_spritesheet.png" type="Texture" id=2]
-[ext_resource path="res://_Art/items/coin.png" type="Texture" id=3]
-[ext_resource path="res://_Art/items/mushroom.png" type="Texture" id=4]
+[ext_resource path="res://tile_maps/sprite_items.png" type="Texture" id=2]
+[ext_resource path="res://blocks/sprite_block.png" type="Texture" id=3]
 
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 464, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 14 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ) ],
+"frames": [ SubResource( 15 ) ],
 "loop": true,
 "name": "hit",
 "speed": 5.0
@@ -43,41 +41,72 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": false,
 "name": "mushroom",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": false,
 "name": "coin",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "fire_flower",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": true,
+"name": "super_star",
 "speed": 5.0
 }, {
 "frames": [  ],
 "loop": false,
 "name": "none",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "1_up",
+"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 32, 4 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=13]
 
 [node name="block" type="StaticBody2D" groups=[
 "Block",
 ]]
 collision_layer = 2
 script = ExtResource( 1 )
-held_item = "none"
+held_item = "fire_flower"
 sprite = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." groups=[
@@ -85,6 +114,7 @@ sprite = SubResource( 3 )
 ]]
 scale = Vector2( 4, 4 )
 frames = SubResource( 3 )
+playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
@@ -93,11 +123,11 @@ anims/hit = SubResource( 4 )
 [node name="HeldItem" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -49 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 6 )
-animation = "none"
+frames = SubResource( 10 )
+animation = "fire_flower"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 7 )
+shape = SubResource( 11 )
 
 [node name="DetectorBreak" type="Area2D" parent="." groups=[
 "BlockHit",
@@ -108,7 +138,7 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorBreak"]
 position = Vector2( 0, 29 )
-shape = SubResource( 8 )
+shape = SubResource( 12 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -119,5 +149,5 @@ collision_layer = 2
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorItem"]
-shape = SubResource( 9 )
+shape = SubResource( 13 )
 [connection signal="area_entered" from="DetectorItem" to="." method="_on_DetectorItem_area_entered"]

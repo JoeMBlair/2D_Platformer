@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite_coin.png-74059896593be13eb383971e455d3b27.stex"
+path="res://.import/sprite_items.png-a823af17530c7dd3683b17ae491383a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/coin/sprite_coin.png"
-dest_files=[ "res://.import/sprite_coin.png-74059896593be13eb383971e455d3b27.stex" ]
+source_file="res://tile_maps/sprite_items.png"
+dest_files=[ "res://.import/sprite_items.png-a823af17530c7dd3683b17ae491383a9.stex" ]
 
 [params]
 

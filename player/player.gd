@@ -13,6 +13,7 @@ export var health : int = 1
 export var state = "idle"
 export var state_powerup = "small"
 var hit_block = false
+#var state_anim = $AnimationTree.get("parameters/playback")
 #onready var player = get_node("PlayerSmall/DetectorHead")
 
 var velocity : Vector2 = Vector2()
@@ -89,6 +90,7 @@ func player_animation():
 			if direction == "left":
 				pass
 				sprite.flip_h = true
+#				state_anim.travel("turn")
 			else:
 				pass
 				sprite.flip_h = false
@@ -146,12 +148,15 @@ func set_state_powerup(powerup):
 		if state_powerup == "mushroom":
 			player_body = $PlayerBig
 			player_head = player_body.get_node("DetectorHead")
+			sprite.position.y = -32
 
 			sprite.animation = "mushroom"
 			
 		elif state_powerup == "small":
 			player_body = $PlayerSmall
 			player_head = player_body.get_node("DetectorHead")
+			sprite.position.y = 0
+			
 			sprite.animation = "small"
 		player_feet = player_body.get_node("DetectorFeet")
 		player_body.set_deferred("disabled", false)

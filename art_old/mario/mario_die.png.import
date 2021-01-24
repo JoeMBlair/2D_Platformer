@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite_coin.png-74059896593be13eb383971e455d3b27.stex"
+path="res://.import/mario_die.png-34b6a280187584afa596a3480d7d70df.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/coin/sprite_coin.png"
-dest_files=[ "res://.import/sprite_coin.png-74059896593be13eb383971e455d3b27.stex" ]
+source_file="res://art_old/mario/mario_die.png"
+dest_files=[ "res://.import/mario_die.png-34b6a280187584afa596a3480d7d70df.stex" ]
 
 [params]
 

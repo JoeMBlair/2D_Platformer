@@ -1,12 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://_Art/reference/SMB_NES_World_1-1_Map.png" type="Texture" id=1]
+[ext_resource path="res://art/reference/SMB_NES_World_1-1_Map.png" type="Texture" id=1]
 [ext_resource path="res://tile_maps/tiles_item.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tile_maps/tiles_block.tscn" type="PackedScene" id=4]
 [ext_resource path="res://tile_maps/tiles_enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://tile_maps/tiles_background.tscn" type="PackedScene" id=6]
 [ext_resource path="res://tile_maps/tiles_object.tscn" type="PackedScene" id=9]
-
 
 [node name="Level1_1" type="Node2D"]
 

@@ -1,11 +1,9 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
-[ext_resource path="res://_Art/mario/mario_spritesheet_16.png" type="Texture" id=2]
-[ext_resource path="res://!Player/player_small.tscn" type="PackedScene" id=3]
-[ext_resource path="res://!Player/player_big.tscn" type="PackedScene" id=4]
-
-
+[ext_resource path="res://player/mario_spritesheet_16.png" type="Texture" id=2]
+[ext_resource path="res://player/player_small.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/player_big.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "crouch"
@@ -29,10 +27,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -80,6 +78,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 length = 0.001
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
@@ -99,10 +98,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -126,10 +125,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -154,13 +153,29 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=7]
+resource_name = "turn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
+
+[sub_resource type="Animation" id=8]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -182,132 +197,177 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [  ]
 }
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 16, 16 )
+region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
-region = Rect2( 80, 0, 16, 16 )
+region = Rect2( 64, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 16, 16 )
+region = Rect2( 80, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 2 )
-region = Rect2( 112, 0, 16, 16 )
+region = Rect2( 96, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 16, 16 )
+region = Rect2( 112, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 16, 16, 16 )
+region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 16, 16, 16 )
+region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 16, 16, 16 )
+region = Rect2( 32, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 16, 16, 16 )
+region = Rect2( 48, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 16, 32 )
+region = Rect2( 64, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 32, 16, 32 )
+region = Rect2( 0, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 32, 16, 32 )
+region = Rect2( 16, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 32, 16, 32 )
+region = Rect2( 32, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 32, 16, 32 )
+region = Rect2( 48, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 2 )
-region = Rect2( 80, 32, 16, 32 )
+region = Rect2( 64, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 2 )
-region = Rect2( 96, 32, 16, 32 )
+region = Rect2( 80, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 2 )
-region = Rect2( 112, 32, 16, 32 )
+region = Rect2( 96, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 64, 16, 32 )
+region = Rect2( 112, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 64, 16, 32 )
+region = Rect2( 0, 64, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 64, 16, 32 )
+region = Rect2( 16, 64, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 64, 16, 32 )
+region = Rect2( 32, 64, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 64, 16, 32 )
+region = Rect2( 48, 64, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 2 )
 region = Rect2( 80, 64, 16, 32 )
 
-[sub_resource type="SpriteFrames" id=35]
+[sub_resource type="SpriteFrames" id=36]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "small",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
 "loop": true,
 "name": "mushroom",
 "speed": 5.0
 } ]
+
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "crouch"
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "die"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "turn"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+
+[sub_resource type="AnimationNodeStateMachine" id=49]
+states/crouch/node = SubResource( 37 )
+states/crouch/position = Vector2( 961, 257 )
+states/die/node = SubResource( 38 )
+states/die/position = Vector2( 573, 96 )
+states/idle/node = SubResource( 39 )
+states/idle/position = Vector2( 597, 257 )
+states/turn/node = SubResource( 40 )
+states/turn/position = Vector2( 990, 96 )
+states/walk/node = SubResource( 41 )
+states/walk/position = Vector2( 789, 96 )
+transitions = [ "idle", "walk", SubResource( 42 ), "idle", "die", SubResource( 43 ), "walk", "idle", SubResource( 44 ), "idle", "crouch", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "walk", "turn", SubResource( 47 ), "turn", "walk", SubResource( 48 ) ]
+graph_offset = Vector2( 73.6106, 0 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=50]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Object",
@@ -325,7 +385,8 @@ anims/fall = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/jump = SubResource( 5 )
 anims/swim = SubResource( 6 )
-anims/walk = SubResource( 7 )
+anims/turn = SubResource( 7 )
+anims/walk = SubResource( 8 )
 
 [node name="JumpTimer" type="Timer" parent="."]
 wait_time = 0.3
@@ -336,14 +397,19 @@ visible = false
 position = Vector2( 0, 2 )
 
 [node name="PlayerBig" parent="." instance=ExtResource( 4 )]
-position = Vector2( 0, 2 )
+position = Vector2( 0, -28 )
 disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
-frames = SubResource( 35 )
+frames = SubResource( 36 )
 animation = "small"
-frame = 6
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 49 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 50 )
 [connection signal="current_state" from="." to="PlayerSmall" method="_on_Player_current_state"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]

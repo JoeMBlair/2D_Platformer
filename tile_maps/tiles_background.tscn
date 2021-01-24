@@ -1,7 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://_Art/terrain/background.png" type="Texture" id=1]
-
+[ext_resource path="res://tile_maps/sprite_backgrounds.png" type="Texture" id=1]
 
 [sub_resource type="TileSet" id=1]
 0/name = "hill_big"
