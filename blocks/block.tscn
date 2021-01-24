@@ -1,9 +1,10 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://blocks/block.gd" type="Script" id=1]
-[ext_resource path="res://Art/blocks/block_spritesheet.png" type="Texture" id=2]
-[ext_resource path="res://Art/items/coin.png" type="Texture" id=3]
-[ext_resource path="res://Art/items/mushroom.png" type="Texture" id=4]
+[ext_resource path="res://_Art/blocks/block_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://_Art/items/coin.png" type="Texture" id=3]
+[ext_resource path="res://_Art/items/mushroom.png" type="Texture" id=4]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
