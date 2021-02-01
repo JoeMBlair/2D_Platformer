@@ -1,151 +1,229 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://player/player_new.gd" type="Script" id=2]
 [ext_resource path="res://player/shader_test.png" type="Texture" id=3]
 [ext_resource path="res://player/super_star.shader" type="Shader" id=4]
 [ext_resource path="res://art_old/mario/mario.png" type="Texture" id=5]
 
-[sub_resource type="ShaderMaterial" id=61]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/new_overalls = Color( 1, 0.192157, 0.0941176, 1 )
 shader_param/new_shirt = Color( 0.776471, 0.388235, 0, 1 )
 shader_param/new_skin = Color( 1, 0.580392, 0.352941, 1 )
 
-[sub_resource type="AtlasTexture" id=77]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=78]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 16, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=79]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 32, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=80]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 48, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=81]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=82]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
 region = Rect2( 80, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=83]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
 region = Rect2( 96, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=84]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 112, 32, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=85]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=86]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
 region = Rect2( 16, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=87]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
 region = Rect2( 32, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=88]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
 region = Rect2( 48, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=89]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=90]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 3 )
 region = Rect2( 80, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=91]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 3 )
 region = Rect2( 96, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=92]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 3 )
 region = Rect2( 112, 64, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=64]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=65]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=66]
+[sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=67]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 3 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=68]
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=69]
+[sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 3 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=70]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 3 )
 region = Rect2( 96, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=71]
+[sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 3 )
 region = Rect2( 112, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=72]
+[sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=73]
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 3 )
 region = Rect2( 16, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=74]
+[sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 3 )
 region = Rect2( 32, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=75]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 3 )
 region = Rect2( 48, 16, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=76]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 16, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=32]
+[sub_resource type="SpriteFrames" id=31]
 animations = [ {
-"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ), SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "big",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ) ],
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
 "name": "small",
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=49]
+resource_name = "die"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.450625, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -288 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.001 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=33]
 resource_name = "fire_flower"
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=48]
+resource_name = "hit"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 9, 9, 10, 11, 12, 9, 12, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "big", "small", "big", "small", "big", "small", "big", "small" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -64 ), Vector2( 0, -64 ), Vector2( 0, -32 ), Vector2( 0, -64 ), Vector2( 0, -32 ), Vector2( 0, -64 ), Vector2( 0, -32 ), Vector2( 0, -64 ), Vector2( 0, -32 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 0.392157 ) ]
+}
+
+[sub_resource type="Animation" id=34]
 length = 0.001
 loop = true
 tracks/0/type = "value"
@@ -161,7 +239,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=35]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
@@ -176,7 +254,7 @@ tracks/0/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=36]
 resource_name = "mushroom"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:frame")
@@ -191,7 +269,7 @@ tracks/0/keys = {
 "values": [ 13, 14, 13, 14, 13, 14, 15, 13, 15, 15 ]
 }
 
-[sub_resource type="Animation" id=93]
+[sub_resource type="Animation" id=37]
 resource_name = "run"
 length = 0.2
 loop = true
@@ -281,48 +359,7 @@ extents = Vector2( 10, 2 )
 [sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 24, 4 )
 
-[sub_resource type="Animation" id=63]
-resource_name = "default"
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:material:shader_param/new_overalls")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0.192157, 0.0941176, 1 ), Color( 0.111919, 0.402344, 0.0612946, 1 ), Color( 1, 0.192157, 0.0941176, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 0.192157, 0.0941176, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:material:shader_param/new_shirt")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0.776471, 0.388235, 0, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 0.666667, 0.266667, 0, 1 ), Color( 0.776471, 0.388235, 0, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:material:shader_param/new_skin")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.805, 0.7, 1 ), Color( 1, 0.580392, 0.352941, 1 ) ]
-}
-
-[sub_resource type="Animation" id=94]
+[sub_resource type="Animation" id=45]
 resource_name = "fire_flower"
 length = 0.4
 loop = true
@@ -363,6 +400,49 @@ tracks/2/keys = {
 "values": [ Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.875, 0.73536, 0.659668, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=47]
+resource_name = "small"
+
+[sub_resource type="Animation" id=46]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/new_overalls")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.192157, 0.0941176, 1 ), Color( 0.111919, 0.402344, 0.0612946, 1 ), Color( 1, 0.192157, 0.0941176, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 0.192157, 0.0941176, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:material:shader_param/new_shirt")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.776471, 0.388235, 0, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 0.666667, 0.266667, 0, 1 ), Color( 0.776471, 0.388235, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:material:shader_param/new_skin")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.805, 0.7, 1 ), Color( 1, 0.580392, 0.352941, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody2D" groups=[
 "Object",
 "Player",
@@ -370,29 +450,23 @@ tracks/2/keys = {
 pause_mode = 2
 collision_mask = 2
 script = ExtResource( 2 )
-health = null
-state_powerup = null
-speed = null
-gravity = null
-jump_force = null
-acceleration = null
-friction = null
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 light_mask = -2147483647
-material = SubResource( 61 )
-position = Vector2( 0, -32 )
+material = SubResource( 1 )
 scale = Vector2( 4, 4 )
-frames = SubResource( 32 )
-animation = "small"
+frames = SubResource( 31 )
+animation = "big"
+frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 33 )
-anims/fire_flower = SubResource( 34 )
-anims/idle = SubResource( 35 )
-anims/jump = SubResource( 36 )
-anims/mushroom = SubResource( 37 )
-anims/run = SubResource( 93 )
+anims/die = SubResource( 49 )
+anims/fire_flower = SubResource( 33 )
+anims/hit = SubResource( 48 )
+anims/idle = SubResource( 34 )
+anims/jump = SubResource( 35 )
+anims/mushroom = SubResource( 36 )
+anims/run = SubResource( 37 )
 anims/swim_down = SubResource( 38 )
 anims/swim_up = SubResource( 39 )
 anims/turn = SubResource( 40 )
@@ -427,7 +501,6 @@ __meta__ = {
 shape = SubResource( 43 )
 
 [node name="DetectorFeet" type="Area2D" parent="."]
-visible = false
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 0, -4 )
 collision_mask = 8
@@ -435,16 +508,22 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorFeet"]
 shape = SubResource( 44 )
 
-[node name="SuperStar" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 63 )
-anims/fire_flower = SubResource( 94 )
+[node name="PowerupPlayer" type="AnimationPlayer" parent="."]
+anims/fire_flower = SubResource( 45 )
+anims/mushroom = SubResource( 36 )
+anims/small = SubResource( 47 )
+anims/super_star = SubResource( 46 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 65.8002, -34.1022 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 5 )
 
 [node name="PowerupTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SuperStarTimer" type="Timer" parent="."]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="area_entered" from="DetectorFeet" to="." method="_on_DetectorFeet_area_entered"]
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]

@@ -65,6 +65,7 @@ func block_hit(powerup):
 
 func instance_item(item):
 	var filename = get_objects.object_paths[item]
+#	var filename = get_objects
 	var item_instance = load(filename).instance()
 #	call_deferred("add_child", item_instance)
 	add_child(item_instance)

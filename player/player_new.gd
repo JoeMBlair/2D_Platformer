@@ -5,9 +5,11 @@ var object_name:= "player_new"
 export var health := 1
 export var state_powerup := ""
 var state := "idle"
+var invunerable := false
 var move_state := "stop"
 var current_state : String
 var current_size := "none"
+var powerup_stop := true
 var sizes := {
 			"small": {
 				"sprite_pos": Vector2(0, -32), 
@@ -28,6 +30,43 @@ var sizes := {
 				"feet_size": Vector2(32, 4),
 				}
 			} 
+var powerup_states := {"small": {
+							"size": "small",
+							"health": 1,
+							"anim": "small",
+							"pause_time": 0,
+							"colours": ["#ff3118", "#c66300", "ff945a"],
+							"powerup_stop": true,
+							"power_level": 1,
+							}, 
+						"mushroom": {
+							"size": "big",
+							"health": 2,
+							"anim": "mushroom",
+							"pause_time": 1,
+							"colours": ["#ff3118", "#c66300", "ff945a"],
+							"powerup_stop": true,
+							"power_level": 2,
+							}, 
+						"fire_flower": {
+							"size": "big",
+							"health": 2,
+							"anim": "fire_flower",
+							"pause_time": 1,
+							"colours": ["#ffffff", "#ff3118", "ff945a"],
+							"powerup_stop": false,
+							"power_level": 3,
+							}, 
+						"super_star": {
+							"size": "none",
+							"health": 0,
+							"anim": "super_star",
+							"pause_time": 0,
+							"colours": ["#ff3118", "#c66300", "ff945a"],
+							"powerup_stop": false,
+							"previous_state": "none",
+							"power_level": 4,
+							}}
 var move_states := {"normal": {
 						"gravity": 1300.0, 
 						"jump_force": 860, 
@@ -42,9 +81,10 @@ var move_states := {"normal": {
 						"speed": 600},
 					"stop": {}
 						}
-var states := ["idle", "walk", "run", "jump", "swim_up", "fall", "powerup"]
+var states := ["idle", "walk", "run", "jump", "swim_up", "fall", "powerup", "die"]
 
 # Movement
+export var enemy_bounce_force : int = 600
 export var speed := 500
 export var gravity := 2000
 export var jump_force := 1050
@@ -58,11 +98,11 @@ var direction := 0.0
 var grounded := false
 var input_run := false
 
-signal pause_game
 
 # Components
 onready var sprite = get_node("AnimatedSprite")
 onready var anim_player = get_node("AnimationPlayer")
+onready var powerup_player = get_node("PowerupPlayer")
 onready var player_body = get_node("CollisionShape2D")
 onready var player_head = get_node("DetectorHead")
 onready var player_feet = get_node("DetectorFeet")
@@ -77,6 +117,8 @@ func _process(_delta):
 	if not state == "die":
 		get_input()
 		call(move_state)
+		if not powerup_stop:
+			call(state_powerup)
 
 
 func _physics_process(delta):
@@ -95,6 +137,8 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, Vector2.UP)
 		
 		block_collisons()
+	elif move_state == "stop" and state == "die": 
+		call(state, delta)
 
 
 func debug():
@@ -104,6 +148,8 @@ func debug():
 								"POS": position_round, 
 								"Velocity": velocity_round,
 								"Direction": direction,
+								"Health": health,
+								"Invunerable": invunerable,
 								"Input Direction": input_direction,
 								"Input Run": input_run,
 								"Size": current_size,
@@ -162,6 +208,7 @@ func block_collisons():
 	for block in blocks:
 		if block.is_in_group("BlockHit") and state == "jump":
 			block.get_owner().block_hit(state_powerup)
+			return
 
 
 func size(player_size):
@@ -201,6 +248,9 @@ func normal():
 	
 	if velocity.y > 0:
 		set_state("fall")
+		pass
+		
+	if input_run:
 		pass
 			
 	if grounded:
@@ -292,53 +342,103 @@ func fall():
 		pass
 
 
-func stop():
+func super_star():
+	invunerable = true
+	powerup_player.play("super_star")
+	yield(get_tree().create_timer(5.0), "timeout")
+	powerup_player.stop()
+	var colours = powerup_states["super_star"].colours
+	set_colours(colours[0], colours[1], colours[2])
+	invunerable = false
+	var prev_state = powerup_states["super_star"].previous_state
+	powerup_stop = powerup_states[prev_state].powerup_stop
+	state_powerup = prev_state
+	pass
 	
+func fire_flower():
+	pass
+
+func stop():
+	pass
+
+func powerup(p_item):
+	if not state_powerup == p_item:
+		var p_size = powerup_states[p_item].size
+		var p_health = powerup_states[p_item].health
+		var p_anim = powerup_states[p_item].anim
+		var pause_time = powerup_states[p_item].pause_time
+		var p_colours = powerup_states[p_item].colours
+		var p_timer = get_node("PowerupTimer")
+		var p_stop = powerup_states[p_item].powerup_stop
+		
+		state_powerup = p_item
+		size(p_size)
+		if not p_health == 0:
+			health = p_health
+		powerup_stop = p_stop
+		if pause_time > 0:
+			anim_player.stop(false)
+			set_move_state("stop")
+			powerup_player.play(p_anim)
+			p_timer.wait_time = pause_time
+			world_properties.pause_game = true
+			p_timer.start()
+			yield(p_timer, "timeout")
+			anim_player.play()
+			
+		set_colours(p_colours[0], p_colours[1], p_colours[2])		
+		powerup_player.stop()
+		world_properties.pause_game = false
+		set_move_state("normal")
+
+
+func set_colours(overalls, shirt, skin):
+	sprite.material.set_shader_param("new_overalls", Color(overalls))
+	sprite.material.set_shader_param("new_shirt", Color(shirt))	
+	sprite.material.set_shader_param("new_skin", Color(skin))
 	pass
 
 
-func powerup(powerup_item):
-	if not state_powerup == powerup_item:
-		velocity = Vector2.ZERO
-		direction = 0	
-		set_state("idle")
-		emit_signal("pause_game")
-		match powerup_item:	
-			"small":
-				sprite.animation = "small"
-				size("small")
-				health = 1
-				state_powerup = "small"
-			"mushroom":
-				size("big")
-				set_move_state("stop")		
-				health = 2
-				state_powerup = "mushroom"
-				anim_player.play("mushroom")
-				world_properties.pause_game = true
-				$PowerupTimer.start()				
-			"fire_flower":
-				size("big")
-				set_move_state("stop")
-				health = 2
-				state_powerup = "fire_flower"
-				$SuperStar.play("fire_flower")
-				$PowerupTimer.start()
-				
+func take_damage():
+	if not invunerable:
+		invunerable = true
+		world_properties.pause_game = true
+		move_state = "stop"	
+		health -= 1
+		if health == 1:
+			anim_player.play("hit")
+			yield(anim_player, "animation_finished")
+			world_properties.pause_game = false
+			move_state = "normal"
+			powerup("small")			
+			yield(get_tree().create_timer(3), "timeout")
+			sprite.modulate = Color(1, 1, 1, 1)
+			invunerable = false			
+		elif health == 0:
+			set_state("die")
 
 
-func _on_animation_finished(anim_name):
-	if anim_name == "mushroom":
-		set_move_state("normal")
-		set_state("idle")
-		world_properties.pause_game = false
+func die(delta):
+	if invunerable:
+		z_index = 2
+		anim_player.play("die")
+		yield(anim_player, "animation_finished")
+		$CollisionShape2D.set_deferred("disabled", true)
+		invunerable = false
+	velocity.x = 0
+	velocity.y += 5000 * delta	
+	velocity = move_and_slide(velocity, Vector2.UP)
 
 
-func _on_PowerupTimer_timeout():
-	set_move_state("normal")
-	set_state("idle")
-	world_properties.pause_game = false
-	$SuperStar.stop()
-	if state_powerup == "fire_flower":
-		sprite.shader_param/new_overalls = Color()
-		
+func _on_DetectorFeet_area_entered(area):
+	if area.get_owner().is_in_group("Enemy"):
+		if state_powerup == "super_star":
+			area.get_owner().powerup = "super_star"
+			area.get_owner().take_damage()	
+					
+			if state == "fall":
+				velocity.y = enemy_bounce_force * -1
+		elif state == "fall":
+			velocity.y = enemy_bounce_force * -1
+			area.get_owner().take_damage()
+

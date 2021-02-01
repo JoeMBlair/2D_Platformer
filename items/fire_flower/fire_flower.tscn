@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://items/fire_flower/sprite_fire_flower.png" type="Texture" id=1]
 [ext_resource path="res://items/fire_flower/fire_flower.gd" type="Script" id=2]
@@ -85,12 +85,15 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 32, 32 )
+
 [node name="FireFlower" type="StaticBody2D" groups=[
 "Item",
 "Object",
 ]]
 pause_mode = 1
-position = Vector2( 0, -64 )
+position = Vector2( 0, -3.6 )
 z_index = -1
 collision_layer = 16
 collision_mask = 2147483648
@@ -110,3 +113,9 @@ shape = SubResource( 10 )
 autoplay = "idle"
 anims/idle = SubResource( 11 )
 anims/spawn = SubResource( 12 )
+
+[node name="DetectorItem" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorItem"]
+shape = SubResource( 13 )
+[connection signal="body_entered" from="DetectorItem" to="." method="_on_DetectorItem_body_entered"]

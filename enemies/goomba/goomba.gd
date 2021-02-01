@@ -3,6 +3,7 @@ extends KinematicBody2D
 var object_name = "goomba"
 export var direction = "right"
 var state = "alive"
+var powerup = ""
 
 # Physics
 export var speed : int = 50
@@ -40,12 +41,14 @@ func _physics_process(delta):
 			velocity.x -= speed
 		else:
 			velocity.x += speed
-			
+	
 		# Gravity
 		velocity.y += gravity * delta
 		
 	# Applying the velocity
 	velocity = move_and_slide(velocity, Vector2.UP)
+	velocity.y += gravity * delta
+	
 
 
 func _on_DetectorLeft_body_entered(_body):
@@ -67,9 +70,14 @@ func _on_Sprite_animation_finished():
 
 func take_damage():
 	state = "dead"
-	velocity.x = 0
-	velocity.y = 0
-	$Sprite.animation = "die"
+	if powerup == "super_star":
+		$AnimationPlayer.play("super_hit")
+		velocity += Vector2(300, -800) 
+		
+	else:
+		velocity.x = 0
+		velocity.y = 0
+		$Sprite.animation = "die"
 	$Detector.queue_free()
 	
 func block_hit():
@@ -78,6 +86,8 @@ func block_hit():
 
 func _on_HitBox_body_entered(body):
 	if body.is_in_group("Player"):
+		print(body.name)
+		body.take_damage()
 		if body.velocity.y < 0.1 and state == "alive":
 			pass
-#			body.take_damage()
+			
