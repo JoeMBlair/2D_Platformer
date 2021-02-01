@@ -8,6 +8,8 @@
 "Block",
 "Object",
 ]]
+pause_mode = 1
+z_index = 1
 script = ExtResource( 3 )
 
 [node name="block" parent="." instance=ExtResource( 1 )]

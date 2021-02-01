@@ -1,34 +1,63 @@
 extends Node2D
-
-export(NodePath) var level_name = "world_1/level_test/level_test"
+var levels = [ 
+			"res://levels/world_1/level_test/level_test.tscn",
+			"res://levels/world_1/level_1_1/level_1_1.tscn"
+			]
+export (String, 
+		"res://levels/world_1/level_test/level_test.tscn",
+		"res://levels/world_1/level_1_1/level_1_1.tscn"
+		) var level_name 
 export(NodePath) var node_path
 var fps
 var level_instance
-signal level_xy
+var level_select := false
+var debug_select := false
+var camera
+var player
 
 func _ready():
 	pass
-	set_camera($LoadLevel.level_bounds)
+#	set_camera($LoadLevel.level_bounds)
 
 
 func _process(_delta):
+	Debug.display_info("Main", {"Level Select": level_select, "Debug Select": debug_select})
 	if Input.is_action_just_pressed("reset"):
-		pass
+		level_select = not level_select
+	if Input.is_action_just_pressed("debug"):
+		debug_select = not debug_select
+		
+	if level_select:
+		if Input.is_action_just_pressed("num_1"):
+			$LoadLevel.load_level(levels[0])
+			level_select = false
+		if Input.is_action_just_pressed("num_2"):
+			$LoadLevel.load_level(levels[1])
+			level_select = false
+		if Input.is_action_just_pressed("num_3"):
+#			$LoadLevel.load_level(levels[2])
+			level_select = false
+			
+	if debug_select:
+		if Input.is_action_just_pressed("num_1"):
+			player.powerup("mushroom")
+			debug_select = false
+		if Input.is_action_just_pressed("num_2"):
+			player.powerup("small")
+			debug_select = false
+		if Input.is_action_just_pressed("num_3"):
+#			$LoadLevel.load_level(levels[2])
+			level_select = false
 	Debug.display_info("Main", {"FPS": Engine.get_frames_per_second()})
 
 
-func _on_LoadLevel_loaded(level_bounds):
-	set_camera(level_bounds)
-
-
-func set_camera(bounds):
-		var player = get_node("LoadLevel/Objects/Player")
-		var camera = Camera2D.new()
-		camera.name = "Camera2D"
-		player.add_child(camera)
-		camera.current = true
-		camera.limit_left = bounds.position.x * 64
-		camera.limit_top = bounds.position.y * 64
-		camera.limit_right = bounds.size.x * 64
-		camera.limit_bottom = (bounds.position.y + bounds.size.y) * 64
-
+func _on_LoadLevel_loaded(bounds, local_player):
+	player = local_player
+	camera = Camera2D.new()
+	camera.name = "Camera2D"
+	player.add_child(camera)
+	camera.current = true
+	camera.limit_left = bounds.position.x * 64
+	camera.limit_top = bounds.position.y * 64
+	camera.limit_right = bounds.size.x * 64
+	camera.limit_bottom = (bounds.position.y + bounds.size.y) * 64

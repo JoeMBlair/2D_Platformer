@@ -3,7 +3,7 @@
 [ext_resource path="res://tile_maps/sprite_objects.png" type="Texture" id=1]
 
 [sub_resource type="TileSet" id=1]
-0/name = "player"
+0/name = "player_new"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )

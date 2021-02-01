@@ -6,6 +6,7 @@
 [node name="Main" type="Node2D"]
 z_index = 1
 script = ExtResource( 1 )
+level_name = "res://levels/world_1/level_1_1/level_1_1.tscn"
 
 [node name="LoadLevel" parent="." instance=ExtResource( 2 )]
 [connection signal="loaded" from="LoadLevel" to="." method="_on_LoadLevel_loaded"]

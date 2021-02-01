@@ -7,8 +7,7 @@ func _ready():
 	pass
 
 
-func _on_block_hit_response(powerup, item):
-	print(self.name)
+func _on_block_hit_response(_powerup, _item):
 	$block/CollisionShape2D.set_deferred("disabled", false)
 	$block/AnimatedSprite.animation = "hit"
 	$block.health = 0

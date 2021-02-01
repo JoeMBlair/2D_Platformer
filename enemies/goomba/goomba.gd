@@ -7,6 +7,8 @@ var state = "alive"
 # Physics
 export var speed : int = 50
 export var jumpForce : int = 600
+var bounce_force = 300
+var paused = false
 #var gravity : int = Global.gravity
 var gravity : int = world_properties.gravity
 
@@ -23,7 +25,7 @@ func debug():
 	Debug.display_info("Goomba", debug_array)
 
 
-func _ready():
+func _ready(): 
 	pass
 
 
@@ -69,11 +71,13 @@ func take_damage():
 	velocity.y = 0
 	$Sprite.animation = "die"
 	$Detector.queue_free()
+	
+func block_hit():
+	pass
 
 
 func _on_HitBox_body_entered(body):
 	if body.is_in_group("Player"):
-		print(body.name)
 		if body.velocity.y < 0.1 and state == "alive":
-			print(body.is_in_group("Player"))
-			body.take_damage()
+			pass
+#			body.take_damage()

@@ -24,7 +24,7 @@ func spawn_item():
 
 
 func _process(delta):
-	debug()
+#	debug()
 	velocity.x = 0
 	if state == "move":
 		velocity.y += gravity * delta		
@@ -65,3 +65,11 @@ func _on_DetectorRight_body_entered(_body):
 	direction = "left"
 	$DetectorRight/CollisionShape2D.set_deferred("disabled", true)
 	$DetectorLeft/CollisionShape2D.set_deferred("disabled", false)
+
+
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("Player"):
+		if state == "move":
+			body.powerup("mushroom")
+			queue_free()
+	pass # Replace with function body.

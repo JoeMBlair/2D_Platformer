@@ -2,7 +2,6 @@
 
 [ext_resource path="res://source/debug.gd" type="Script" id=1]
 
-
 [node name="Debug" type="CanvasLayer"]
 script = ExtResource( 1 )
 
@@ -12,8 +11,8 @@ autostart = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-margin_right = 148.0
-margin_bottom = 156.0
+margin_right = 400.0
+margin_bottom = 400.0
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false

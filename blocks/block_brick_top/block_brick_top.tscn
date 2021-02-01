@@ -9,12 +9,15 @@
 "Object",
 "Tile",
 ]]
+pause_mode = 1
+z_index = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="block" parent="." instance=ExtResource( 3 )]
+held_item = "none"
 sprite = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

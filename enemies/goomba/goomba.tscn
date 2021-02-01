@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://enemies/goomba/goomba.gd" type="Script" id=1]
 [ext_resource path="res://enemies/goomba/sprite_goomba.png" type="Texture" id=2]
@@ -20,7 +20,7 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "walk",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [ SubResource( 3 ) ],
 "loop": false,
@@ -40,21 +40,25 @@ extents = Vector2( 1, 6 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 1, 6 )
 
+[sub_resource type="Animation" id=9]
+resource_name = "block_hit"
+
 [node name="Goomba" type="KinematicBody2D" groups=[
 "Enemy",
 "Object",
 "Tile",
 ]]
+pause_mode = 1
 collision_layer = 2147483652
 collision_mask = 6
 script = ExtResource( 1 )
 direction = "left"
+speed = 150
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 4, 4 )
 frames = SubResource( 4 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -98,6 +102,9 @@ collision_mask = 6
 position = Vector2( 36, 0 )
 scale = Vector2( 4, 4 )
 shape = SubResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/block_hit = SubResource( 9 )
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
 [connection signal="body_entered" from="Detector/Body" to="." method="_on_HitBox_body_entered"]
 [connection signal="body_entered" from="Detector/Left" to="." method="_on_DetectorLeft_body_entered"]

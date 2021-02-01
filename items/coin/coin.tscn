@@ -64,13 +64,14 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -80 ), Vector2( 0, -130 ), Vector2( 0, -130 ), Vector2( 0, -80 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 12, 12 )
 
 [node name="Coin" type="StaticBody2D" groups=[
 "Item",
 "Object",
 ]]
+pause_mode = 1
 collision_layer = 2147483664
 collision_mask = 0
 script = ExtResource( 2 )
@@ -100,5 +101,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectorItem"]
 position = Vector2( -4, 4 )
-shape = SubResource( 8 )
+shape = SubResource( 4 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
