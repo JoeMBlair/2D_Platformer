@@ -23,25 +23,18 @@ func _process(_delta):
 	pass
 	
 func _physics_process(delta):
-	block_tl.position = _quadratic_bezier(l.start_pos, l.mid_pos, l.end_pos, time)
-	block_tr.position = _quadratic_bezier(r.start_pos, r.mid_pos, r.end_pos, time)
-	block_bl.position = _quadratic_bezier(l.start_pos, l.mid_pos, l.end_pos, time)
-	block_br.position = _quadratic_bezier(r.start_pos, r.mid_pos, r.end_pos, time)
-	if time < 1:
-		time += 2 * delta
-
-func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float):
-	var q0 = p0.linear_interpolate(p1, t)
-	var q1 = p1.linear_interpolate(p2, t)
-	
-	var rt = q0.linear_interpolate(q1, t)
-	return rt
+	pass
 			
 func check_health(item):
 	if $block.health == 0:
 		if item != "none":
 			$block/AnimatedSprite.animation = "hit"
 		else:
+			$AnimationPlayer.play("break")
+			$block.visible = false
+			yield(get_tree().create_timer(0.5), "timeout")
+			$block.queue_free()
+			yield(get_node("AnimationPlayer"), "animation_finished")
 			queue_free()
 
 

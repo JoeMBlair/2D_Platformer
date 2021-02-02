@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://player/player_new.gd" type="Script" id=2]
 [ext_resource path="res://player/shader_test.png" type="Texture" id=3]
@@ -7,9 +7,9 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
-shader_param/new_overalls = Color( 1, 0.192157, 0.0941176, 1 )
-shader_param/new_shirt = Color( 0.776471, 0.388235, 0, 1 )
-shader_param/new_skin = Color( 1, 0.580392, 0.352941, 1 )
+shader_param/new_overalls = Color( 0.0458363, 0.00880776, 0.004314, 1 )
+shader_param/new_shirt = Color( 0.6717, 0.272239, 0, 1 )
+shader_param/new_skin = Color( 1, 0.794705, 0.684092, 1 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -439,6 +439,103 @@ tracks/2/keys = {
 "values": [ Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.805, 0.7, 1 ), Color( 1, 0.580392, 0.352941, 1 ) ]
 }
 
+[sub_resource type="Animation" id=49]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/new_overalls")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0.686275, 0.12549, 1 ), Color( 1, 0.192157, 0.0941176, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:material:shader_param/new_shirt")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.192157, 0.0941176, 1 ), Color( 1, 0.192157, 0.0941176, 1 ), Color( 0.776471, 0.388235, 0, 1 ), Color( 1, 0.192157, 0.0941176, 1 ), Color( 1, 0.580392, 0.352941, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:material:shader_param/new_skin")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 0.875, 0.73536, 0.659668, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=50]
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 13, 14, 13, 14, 13, 14, 15, 13, 15, 15 ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "small"
+
+[sub_resource type="Animation" id=52]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/new_overalls")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.192157, 0.0941176, 1 ), Color( 0.111919, 0.402344, 0.0612946, 1 ), Color( 1, 0.192157, 0.0941176, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 0.192157, 0.0941176, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:material:shader_param/new_shirt")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.776471, 0.388235, 0, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 0.580392, 0.352941, 1 ), Color( 0.666667, 0.266667, 0, 1 ), Color( 0.776471, 0.388235, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:material:shader_param/new_skin")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.580392, 0.352941, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.805, 0.7, 1 ), Color( 1, 0.580392, 0.352941, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody2D" groups=[
 "Object",
 "Player",
@@ -509,6 +606,12 @@ anims/fire_flower = SubResource( 46 )
 anims/mushroom = SubResource( 37 )
 anims/small = SubResource( 47 )
 anims/super_star = SubResource( 48 )
+
+[node name="PowerupPlayer2" type="AnimationPlayer" parent="."]
+anims/fire_flower = SubResource( 49 )
+anims/mushroom = SubResource( 50 )
+anims/small = SubResource( 51 )
+anims/super_star = SubResource( 52 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
