@@ -10,7 +10,7 @@ var player
 func _ready():
 	pass
 	
-func _process(delta):
+func _process(_delta):
 	if player:
 		var distance_to_player = self.get_global_position() - player.get_global_position()
 		if abs(distance_to_player.x) > 110:

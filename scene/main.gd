@@ -49,7 +49,7 @@ func _process(_delta):
 			player.powerup("fire_flower")
 			debug_select = false
 		if Input.is_action_just_pressed("num_4"):
-			player.powerup_states["super_star"].previous_state = player.state_powerup
+			player.powerups["super_star"].previous_state = player.state_powerup
 			player.powerup("super_star")
 			debug_select = false
 	Debug.display_info("Main", {"FPS": Engine.get_frames_per_second()})

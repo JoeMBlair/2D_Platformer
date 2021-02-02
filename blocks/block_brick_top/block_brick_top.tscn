@@ -63,5 +63,5 @@ texture = ExtResource( 4 )
 offset = Vector2( 20, 2 )
 vframes = 2
 hframes = 2
-[connection signal="block_hit_response" from="block" to="." method="_on_block_hit_response"]
 [connection signal="block_hit_response" from="block" to="." method="_on_block_block_hit_response"]
+[connection signal="block_hit_response" from="block" to="." method="_on_block_hit_response"]

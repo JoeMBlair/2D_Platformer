@@ -34,8 +34,8 @@ func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float):
 	var q0 = p0.linear_interpolate(p1, t)
 	var q1 = p1.linear_interpolate(p2, t)
 	
-	var r = q0.linear_interpolate(q1, t)
-	return r
+	var rt = q0.linear_interpolate(q1, t)
+	return rt
 			
 func check_health(item):
 	if $block.health == 0:

@@ -2,12 +2,11 @@ extends KinematicBody2D
 
 # Properties
 var object_name:= "player_new"
-export var health := 1
-export var state_powerup := ""
+var health := 1
+var state_powerup := ""
 var state := "idle"
 var invunerable := false
 var move_state := "stop"
-var current_state : String
 var current_size := "none"
 var powerup_stop := true
 var sizes := {
@@ -30,7 +29,7 @@ var sizes := {
 				"feet_size": Vector2(32, 4),
 				}
 			} 
-var powerup_states := {"small": {
+var powerups := {"small": {
 							"size": "small",
 							"health": 1,
 							"anim": "small",
@@ -67,9 +66,9 @@ var powerup_states := {"small": {
 							"previous_state": "none",
 							"power_level": 4,
 							}}
-var move_states := {"normal": {
-						"gravity": 1300.0, 
-						"jump_force": 860, 
+var move_modes := {"normal": {
+						"gravity": world_properties.gravity, 
+						"jump_force": 1500, 
 						"acceleration": 0.01,
 						"friction": 0.1,
 						"speed": 500},
@@ -84,20 +83,23 @@ var move_states := {"normal": {
 var states := ["idle", "walk", "run", "jump", "swim_up", "fall", "powerup", "die"]
 
 # Movement
-export var enemy_bounce_force : int = 600
+var velocity := Vector2.ZERO
 export var speed := 500
-export var gravity := 2000
+onready var gravity = world_properties.gravity
 export var jump_force := 1050
+export var enemy_bounce_force : int = 600
 export var acceleration := 0.01
 export var friction := 0.1
-var velocity := Vector2.ZERO
-var max_velocity := Vector2(0, -100)
-var input_direction := Vector2.ZERO
-var input_is_just_pressed := Vector2.ZERO
 var direction := 0.0
 var grounded := false
-var input_run := false
 
+#Input
+var input_direction := Vector2.ZERO
+var input_run := false
+var input_attack := false
+
+var state_history := []
+var pup_history := []
 
 # Components
 onready var sprite = get_node("AnimatedSprite")
@@ -173,8 +175,10 @@ func get_input():
 		input_direction.x += 1
 	if Input.is_action_just_pressed("jump"):
 		input_direction.y = -1
-	if Input.is_action_just_pressed("run_attack"):
+	if Input.is_action_just_pressed("run"):
 		input_run = true
+	if Input.is_action_just_pressed("attack"):
+		input_attack = true
 
 	if Input.is_action_just_released("move_left"):
 		input_direction.x += 1
@@ -182,8 +186,10 @@ func get_input():
 		input_direction.x -= 1
 	if Input.is_action_just_released("jump"):
 		input_direction.y = 0
-	if Input.is_action_just_released("run_attack"):
+	if Input.is_action_just_released("run"):
 		input_run = false
+	if Input.is_action_just_released("attack"):
+		input_attack = false
 
 
 func set_state(new_state):
@@ -192,14 +198,14 @@ func set_state(new_state):
 
 
 func set_move_state(new_state):
-	if move_states.has(new_state):
+	if move_modes.has(new_state):
 		if new_state == "stop":
 			move_state = new_state
 		elif move_state != new_state:
 			move_state = new_state
-			gravity = move_states[new_state].gravity
-			jump_force = move_states[new_state].jump_force
-			speed = move_states[new_state].speed
+			gravity = move_modes[new_state].gravity
+			jump_force = move_modes[new_state].jump_force
+			speed = move_modes[new_state].speed
 	else:
 		printerr(new_state + " is not a valid move state")
 
@@ -243,8 +249,11 @@ func flip_direction():
 
 # Move state functions
 func normal():
-	input_direction.normalized()
+#	input_direction.normalized()
 	direction = input_direction.x
+	
+	if input_attack:
+		pass
 	
 	if velocity.y > 0:
 		set_state("fall")
@@ -327,7 +336,9 @@ func jump():
 		velocity.y -= jump_force
 		grounded = false
 		anim_player.play("jump")
-		input_direction.y = 0
+	if input_direction.y == 0:
+		velocity.y = 0
+		set_state("fall")
 
 
 func swim_up():
@@ -339,6 +350,8 @@ func swim_up():
 func fall():
 	if grounded:
 		set_state("idle")
+		input_direction.y = 0
+		
 		pass
 
 
@@ -347,15 +360,17 @@ func super_star():
 	powerup_player.play("super_star")
 	yield(get_tree().create_timer(5.0), "timeout")
 	powerup_player.stop()
-	var colours = powerup_states["super_star"].colours
+	var colours = powerups["super_star"].colours
 	set_colours(colours[0], colours[1], colours[2])
 	invunerable = false
-	var prev_state = powerup_states["super_star"].previous_state
-	powerup_stop = powerup_states[prev_state].powerup_stop
+	var prev_state = powerups["super_star"].previous_state
+	powerup_stop = powerups[prev_state].powerup_stop
 	state_powerup = prev_state
 	pass
-	
+
+
 func fire_flower():
+	
 	pass
 
 func stop():
@@ -363,13 +378,13 @@ func stop():
 
 func powerup(p_item):
 	if not state_powerup == p_item:
-		var p_size = powerup_states[p_item].size
-		var p_health = powerup_states[p_item].health
-		var p_anim = powerup_states[p_item].anim
-		var pause_time = powerup_states[p_item].pause_time
-		var p_colours = powerup_states[p_item].colours
+		var p_size = powerups[p_item].size
+		var p_health = powerups[p_item].health
+		var p_anim = powerups[p_item].anim
+		var pause_time = powerups[p_item].pause_time
+		var p_colours = powerups[p_item].colours
 		var p_timer = get_node("PowerupTimer")
-		var p_stop = powerup_states[p_item].powerup_stop
+		var p_stop = powerups[p_item].powerup_stop
 		
 		state_powerup = p_item
 		size(p_size)
@@ -383,7 +398,7 @@ func powerup(p_item):
 			p_timer.wait_time = pause_time
 			world_properties.pause_game = true
 			p_timer.start()
-			yield(p_timer, "timeout")
+			yield(get_node("PowerupTimer"), "timeout")
 			anim_player.play()
 			
 		set_colours(p_colours[0], p_colours[1], p_colours[2])		
@@ -407,7 +422,7 @@ func take_damage():
 		health -= 1
 		if health == 1:
 			anim_player.play("hit")
-			yield(anim_player, "animation_finished")
+			yield(get_node("AnimationPlayer"), "animation_finished")
 			world_properties.pause_game = false
 			move_state = "normal"
 			powerup("small")			
@@ -422,7 +437,7 @@ func die(delta):
 	if invunerable:
 		z_index = 2
 		anim_player.play("die")
-		yield(anim_player, "animation_finished")
+		yield(get_node("AnimationPlayer"), "animation_finished")
 		$CollisionShape2D.set_deferred("disabled", true)
 		invunerable = false
 	velocity.x = 0
